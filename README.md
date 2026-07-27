@@ -26,6 +26,14 @@ The command is **Highlight with comment**. Bind it to a hotkey, or add it to a t
 
 Empty comment gives you a plain `==highlight==`. Escape cancels and leaves your selection alone.
 
+## Dictating comments
+
+Holding **right Ctrl** with text selected opens the prompt on its own, no button needed.
+
+That is deliberate: right Ctrl is the default push-to-talk key for [MacWhisper](https://goodsnooze.gumroad.com/l/macwhisper), so a single press both starts dictation and opens the box that the transcript will be typed into. Select, hold, talk, let go, Enter. Hold again to add more before you commit.
+
+It only fires when there is a selection, so right Ctrl behaves normally everywhere else. Works with any dictation tool bound to that key, or with nobody holding it at all, in which case it is just a fast keyboard shortcut.
+
 ## Install
 
 **Manually**: download `main.js` and `manifest.json` from the [latest release](https://github.com/chrisns/obsidian-highlight-comment/releases/latest) into `<vault>/.obsidian/plugins/highlight-comment/`, then enable it in Settings → Community plugins.
