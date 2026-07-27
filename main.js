@@ -1,4 +1,4 @@
-const { Plugin, Modal, Setting, Notice } = require("obsidian");
+const { Plugin, Modal, Notice } = require("obsidian");
 
 class CommentModal extends Modal {
   constructor(app, onSubmit, onClosed) {
@@ -8,17 +8,30 @@ class CommentModal extends Modal {
   }
 
   onOpen() {
-    this.setTitle("Comment");
-    new Setting(this.contentEl).addText((text) => {
-      text.setPlaceholder("comment");
-      text.inputEl.addEventListener("keydown", (e) => {
-        if (e.key !== "Enter") return;
-        e.preventDefault();
-        this.submitted = text.inputEl.value;
-        this.close();
-      });
-      window.setTimeout(() => text.inputEl.focus(), 0);
+    const input = this.contentEl.createEl("textarea", {
+      attr: { rows: 1, placeholder: "comment" },
     });
+    input.style.width = "100%";
+    input.style.resize = "none";
+
+    const grow = () => {
+      input.style.height = "auto";
+      input.style.height = `${input.scrollHeight}px`;
+    };
+    input.addEventListener("input", grow);
+
+    input.addEventListener("keydown", (e) => {
+      // shift+enter for a line break, enter to commit
+      if (e.key !== "Enter" || e.shiftKey) return;
+      e.preventDefault();
+      this.submitted = input.value;
+      this.close();
+    });
+
+    window.setTimeout(() => {
+      input.focus();
+      grow();
+    }, 0);
   }
 
   onClose() {
@@ -48,10 +61,13 @@ module.exports = class HighlightCommentPlugin extends Plugin {
     this.isOpen = true;
     new CommentModal(
       this.app,
-      (comment) =>
+      (comment) => {
+        // inline footnotes cannot span lines, so flatten anything typed as one
+        const text = comment.replace(/\s*\n\s*/g, " ").trim();
         editor.replaceSelection(
-          comment.trim() ? `==${selection}==^[${comment.trim()}]` : `==${selection}==`
-        ),
+          text ? `==${selection}==^[${text}]` : `==${selection}==`
+        );
+      },
       () => (this.isOpen = false)
     ).open();
   }
