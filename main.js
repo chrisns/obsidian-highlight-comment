@@ -34,17 +34,8 @@ module.exports = class HighlightCommentPlugin extends Plugin {
       id: "add",
       name: "Highlight with comment",
       icon: "highlighter",
+      hotkeys: [{ modifiers: ["Mod"], key: "." }],
       editorCallback: (editor) => this.prompt(editor),
-    });
-
-    // ponytail: right Ctrl is the MacWhisper push-to-dictate key. Opening the
-    // modal on that same keypress means the transcript lands in its input, so
-    // "select, hold, talk" is the whole interaction. Hardcoded until someone
-    // wants a different key.
-    this.registerDomEvent(document, "keydown", (e) => {
-      if (e.code !== "ControlRight" || e.repeat || this.isOpen) return;
-      const editor = this.app.workspace.activeEditor?.editor;
-      if (editor?.getSelection()) this.prompt(editor);
     });
   }
 

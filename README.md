@@ -18,7 +18,7 @@ That is the format [sidebar-highlights](https://github.com/trevware/obsidian-sid
 
 ## Usage
 
-The command is **Highlight with comment**. Bind it to a hotkey, or add it to a toolbar:
+The command is **Highlight with comment**, bound to `Cmd .` (`Ctrl .` on Windows and Linux) out of the box. Rebind it in Settings → Hotkeys, or add it to a toolbar:
 
 - **[Editing Toolbar](https://github.com/PKM-er/obsidian-editing-toolbar)**: Settings → Editing Toolbar → add the command, it ships with a highlighter icon.
 - **[Commander](https://github.com/phibr0/obsidian-commander)**: add it to the ribbon, status bar, or page header.
@@ -28,11 +28,7 @@ Empty comment gives you a plain `==highlight==`. Escape cancels and leaves your 
 
 ## Dictating comments
 
-Holding **right Ctrl** with text selected opens the prompt on its own, no button needed.
-
-That is deliberate: right Ctrl is the default push-to-talk key for [MacWhisper](https://goodsnooze.gumroad.com/l/macwhisper), so a single press both starts dictation and opens the box that the transcript will be typed into. Select, hold, talk, let go, Enter. Hold again to add more before you commit.
-
-It only fires when there is a selection, so right Ctrl behaves normally everywhere else. Works with any dictation tool bound to that key, or with nobody holding it at all, in which case it is just a fast keyboard shortcut.
+The prompt takes focus as soon as it opens, so anything your dictation tool types goes into it rather than into the note. With [MacWhisper](https://goodsnooze.gumroad.com/l/macwhisper) that makes the whole loop: select, `Cmd .`, hold your push-to-talk key, talk, Enter. Dictate again before pressing Enter to add more.
 
 ## Install
 
